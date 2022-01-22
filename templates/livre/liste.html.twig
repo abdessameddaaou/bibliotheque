@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Liste des Livres</title>{% endblock %}
+
+{% block contenu %}
+
+	<img src="/assets/img/livres.jpg" alt="livres" style="display: block; margin-left: auto; margin-right: auto; width: 100%; border-radius: 25px;"/>
+
+	<br>
+
+	<h2>
+		{# <a href="{{ path('ajouter_livre') }}" class="btn btn-success" style="position: relative; float: right;">Ajouter un nouveau livre</a>		 #}
+			<div class="dropdown" style="position: relative; float: right;">
+				<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					Les actions
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item btn btn-success" href="{{ path('ajouter_livre') }}">Ajouter un nouveau livre</a></li>
+					<li><a class="dropdown-item btn btn-success" href="{{ path('Lister_livres_periodes') }}">Chercher des livre entre deux dates</a></li>
+					<li><a class="dropdown-item btn btn-success" href="{{ path('Lister_livres_periodes_notes') }}">Chercher des livre entre deux dates et deux notes</a></li>
+					{# <li><a class="dropdown-item btn btn-success" href="{{ path('chercher_livre_titre') }}">Chercher un livre à travers le titre</a></li> #}
+					<li><a class="dropdown-item btn btn-success" href="{{ path('lister_livres_parite') }}">Les livres pour lesquels la parité homme/femme parmi les auteurs est respectée.</a></li>
+					<li><a class="dropdown-item btn btn-success" href="{{ path('Lister_livres_nationalite') }}">Les livres dont tous les auteurs sont de nationalités différentes.</a></li>
+				</ul>
+			</div>
+	</h2>
+	
+
+	<div id="portfolio">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">isbn</th>
+					<th scope="col">titre</th>
+					<th scope="col">Date de parution</th>
+					<th scope="col">Nombre de pages</th>
+					{# <th scope="col">Date de parution</th> #}
+                    <th scope="col">Note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for livre in livres %}
+					<tr>
+						<th scope="row">{{ livre.id }}</th>
+						<td>{{ livre.isbn }}</td>
+						<td>{{ livre.titre }}</td>
+
+						<td>{{ livre.datedeparution|date('d/m/Y') }}</td>
+
+                        <td>{{ livre.nbpages }}</td>
+						{# <td>{{ livre.datedeparution }}</td> #}
+                        <td>{{ livre.note }}</td>
+						<td>
+							<a data-bs-toggle="modal" data-bs-target="#id{{livre.id}}" class="btn btn-danger">
+								<img src="/assets/img/corbeille.png" alt="Supprimer" style="width:20px"/>
+							</a>
+							{# Modal #}
+								<div class="modal fade" id="id{{livre.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Supprimer : <span class='text-primary'> {{livre.titre}}</span></h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											Êtes-vous certain de vouloir supprimer ce livre ? 
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+											<a href="{{ path('supprimer_livre',{'id':livre.id})}}" type="button" class="btn btn-danger">Supprimer</a>
+										</div>
+										</div>
+									</div>
+								</div>
+
+							{# Fin modal #}
+                            <a href="{{path('modifier_livre',{'id':livre.id})}}" class="btn btn-success">
+									<img src="/assets/img/edit.png" alt="Modifier" style="width:20px"/>
+                            </a>
+                            <a href='{{ livre.id }}' class="btn btn-warning">
+									<i class="bi bi-eye-fill"></i>
+                            </a>
+                        </td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{{ form_start(monFormulaire) }}
+        <div class="container">
+            
+            {# <h3 class="text-center mt-0">Veuillez entrer le titre du livre:</h3> #}
+	        <hr class="divider"/>
+            <form>
+                <div class="form-group datepicker">
+                    {{form_widget(monFormulaire.motcle,{'attr': {'class': 'form-control', 'placeholder':'Rechercher un livre par titre'}})}}
+                </div>
+                <br>
+                {{form_widget(monFormulaire.submit, {'attr':{'value' : 'Rechercher le livre'}})}}
+                
+                <div class="form-group">
+            </form>
+    	{{ form_end(monFormulaire) }}
+
+	</div>
+{% endblock %}

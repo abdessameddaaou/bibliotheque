@@ -1,0 +1,100 @@
+# Action 8 
+#fait
+lister_livres: 
+  path: /lister_livres
+  controller: App\Controller\LivreController::listerLivres
+
+#Action 9
+# fait
+afficher_livre:
+  path: /{id}
+  controller: App\Controller\LivreController::afficherLivre
+  requirements:
+    id : \d+ 
+
+#Action 10
+#fait
+ajouter_livre:
+  path: /ajouter
+  controller: App\Controller\LivreController::ajouterLivre
+
+#Action 11
+
+modifier_livre:
+  path: /edit/{id}
+  controller: App\Controller\LivreController::modifierLivre
+  requirements:
+    id : \d+
+
+modifier_livre_suite:
+  path: /editSuite/{id}
+  controller: App\Controller\LivreController::modifierLivreSuite
+  methods: POST
+
+#Action 12
+# fait
+supprimer_livre:
+  path: /supprimer/{id}
+  controller: App\Controller\LivreController::supprimerLivre
+  requirements:
+    id: \d+
+
+#Action 13
+Lister_livres_periodes:
+  path: /lister_livres_2dates
+  controller: App\Controller\LivreController::listerLivresPeriodes
+
+#Action 14
+
+Lister_livres_nationalite:
+  path: /lister_livres_nationalite
+  controller: App\Controller\LivreController::listerLivresNationalite
+  requirements:
+    # nationalite : 
+
+# Action 15
+
+Lister_livres_periodes_notes:
+  path: /lister_periodes_notes
+  controller: App\Controller\LivreController::listerLivresPeriodesNotes
+  requirements:
+    # d1 : date1
+    # d2 : date2
+    # n1 : note 1
+    # n2 : note 2
+
+# Action 17
+
+lister_livres_parite:
+  path: /lister_livres_parite
+  controller: App\Controller\LivreController::listerLivresParite
+
+#fait
+diminuer_note_livre:
+  path: /diminuer/{id}
+  controller: App\Controller\LivreController::diminuerNote
+  requirements:
+    id: \d+
+    #note
+
+# Action 25
+# fait
+rechercher_livre:
+  path: /recherche/{id}
+  controller: App\Controller\LivreController::rechercheLivre
+  requirements:
+    id : \d+
+
+# # Action 26
+# #fait
+# augmenter_note_livre:
+#   path: /augmenter_note/{note}
+#   controller: App\Controller\LivreController::augmenterNote
+
+chercher_livre_titre:
+  path: /chercher_livre_titre
+  controller: App\Controller\LivreController::chercherlivretitre
+
+retour_livre:
+  path: /retour_livre
+  controller: App\Controller\LivreController::retourlivre

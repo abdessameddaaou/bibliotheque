@@ -1,0 +1,56 @@
+{# {% extends "base.html.twig" %}
+{% block contenu %}
+    <div class="card-columns">
+        <div class="card justify-content-center border-5">
+            <img class="card-img-top" src="holder.js/100x180/" alt="">
+            <div class="card-body">
+                {% for list in lists %}
+                                    <p class="card-text">{{list.nomprenom}}</p>
+                                    {% for ecrire in list.ecrire %}
+                                        <ul>
+                                            <li>{{ecrire.titre}}</li>
+                                        </ul>
+                                        
+                                    {% endfor %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %} #}
+
+{% extends "base.html.twig" %}
+    {% block contenu %}
+
+       	<div id="portfolio">
+         {# <h3 class='text-center text-warning'>Liste des auteurs ayant au mois 3 livres</h3> #}
+         <h3 class="text-center mt-0">
+         <a href='{{ path('lister_auteurs') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+                <br>
+         Liste des auteurs ayant au mois 3 livres</h3>
+	     <hr class="divider"/>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Auteur</th>
+                    <th scope="col">Livres</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for list in lists %}
+					<tr>
+						<th scope="row">{{ list.id }}</th>
+						<td>{{ list.nomprenom }}</td>
+						<td>{% for ecrire in list.ecrire %}
+                            {{ ecrire.titre }}<br>   
+                        {% endfor %}</td> 
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+        
+	</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+    <div class="card-columns">
+        <h1 class='text-center mb-5'>
+        <a href='{{ path('lister_auteurs') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+                <br>
+        List des genres pour l'auteur : <span class='text-primary'>{{auteur.nomprenom}}</span></h1>
+        <div class="card justify-content-center border-5">
+            <img class="card-img-top" src="holder.js/100x180/" alt="">
+            <div class="card-body">
+                {% for genre in genres %}  
+                    <ul>
+                        <li>{{genre.nom}}  </li>
+                    </ul> 
+                     
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

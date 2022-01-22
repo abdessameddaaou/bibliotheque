@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+
+{% block contenu %}
+
+	<img src="/assets/img/genres.jpg" alt="livres" style="display: block; margin-left: auto; margin-right: auto; width: 100%; border-radius: 25px;"/>
+
+	<br>
+
+	<h2>
+	<div class="dropdown" style="position: relative; float: right;">
+				<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					Les actions
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item btn btn-success" href="{{ path('ajouter_genre') }}">Ajouter un nouveau genre</a></li>
+				</ul>
+			</div></h2>
+	
+	<div id="portfolio">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Auteurs</th>
+					<th scope="col">Nombre de pages</th>
+					<th scope="col">Nombre de pages moyennes</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for genre in genres %}
+					<tr>
+						<th scope="row">{{ genre.id }}</th>
+						<td>{{ genre.nom }}</td>
+						<td>
+							{% for auteur in genre.auteurs %}
+                                {# {{ livre.titre }} 
+								<br/> #}
+								{{auteur}}
+								<br/>
+                            {% endfor %}
+						</td>
+						<td>{{ genre.nbPages }}</td>
+						<td>{{ genre.nbPagesmoy }}</td>
+						<td>
+							<a data-bs-toggle="modal" data-bs-target="#id{{genre.id}}" class="btn btn-danger">
+								<img src="/assets/img/corbeille.png" alt="Supprimer" style="width:20px"/>
+							</a>
+							<div class="modal fade" id="id{{genre.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Supprimer : <span class='text-primary'> {{genre.nom}}</span></h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+									 <div class="modal-body">
+										Êtes-vous certain de vouloir supprimer {{ genre.nom }} ?
+									</div> 
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+										{% if error %}
+											<a href='{{ genre.id }}' class="btn btn-danger">Supprimer</a>
+										{% else %}
+											<a href='supprimer/{{ genre.id }}' class="btn btn-danger">Supprimer</a>
+										{% endif %}
+									</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{% if error %}
+			<div class="alert alert-danger" role="alert">
+				<p>Un ou plusieurs livre possède ce genre ! Impossible de le supprimer.</p>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

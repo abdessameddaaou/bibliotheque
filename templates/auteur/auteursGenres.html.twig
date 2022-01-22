@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+    <div class="card-columns">
+<h3 class="text-center mt-0">
+                <a href='{{ path('lister_auteurs') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+            <br>
+	Liste des genres par auteurs en fonction de la date de parution des livres :</h3>
+	<hr class="divider"/>
+	<table class="table">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for auteur in auteurs %}
+					<tr>
+						<td>{{auteur.nomprenom}}</td>
+					</tr>
+					<td>
+					{% for livre in auteur.ecrire %}
+						{% for genre in livre.auteurgenres %}
+							<ul>
+								<li>{{livre.titre}} &#x2192 {{ genre }}</li>
+							</ul>
+						{% endfor %}
+					{% endfor %}
+					</td>
+				{% endfor %}
+			</tbody>
+			</table>
+        {# <table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Auteur</th>
+					<th scope="col">Liste des genres</th>
+					<th scope="col">Nombre de livres écrits</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for auteur in auteurs %}
+					<tr>
+						<th scope="row">{{ auteur.id }}</th>
+						<td>{{ auteur.nomPrenom }}</td>
+						<td>
+							{% for item in test %}
+								{{ item.nom_prenom }}
+							{% endfor %}
+						<td>
+						<td>{{ auteur.nbecrits }}</td>
+						<td>
+							<a href="" class="btn btn-danger">
+								<img src="/assets/img/corbeille.png" alt="Supprimer" style="width:20px"/>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table> #}
+    </div>
+{% endblock %}

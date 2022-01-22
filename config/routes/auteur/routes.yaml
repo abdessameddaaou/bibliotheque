@@ -1,0 +1,68 @@
+# Action 3
+lister_auteurs:
+ path: /liste
+ controller: App\Controller\AuteurController::listerAuteurs
+
+# Action 4
+afficher_auteur:
+ path: /{id}
+ controller: App\Controller\AuteurController::afficherAuteur
+ requirements:
+  id: \d+
+
+# Action 5
+ajouter_auteur:
+ path: /ajouter
+ controller: App\Controller\AuteurController::ajouterAuteur
+# ajouter1_auteur:
+#  path: /ajouter/{nomprenom}-{nationalite}.{sexe}-{date}
+#  controller: App\Controller\AuteurController::ajouter
+ 
+# Action 6
+modifier_auteur:
+ path: /edit/{id}
+ controller: App\Controller\AuteurController::modifierAuteur
+ requirements:
+  id: \d+
+
+modifier_auteur_suite:
+ path: /editSuite/{id}
+ controller: App\Controller\AuteurController::modifierAuteurSuite
+ methods: POST
+
+# Action 7
+supprimer_auteur:
+ path: /supprimer/{id}
+ controller: App\Controller\AuteurController::supprimerAuteur
+ requirements:
+  id: \d+
+supprimer_auteur_livre:
+  path: /supprimer_auteur_livre/{id}
+  controller: App\Controller\AuteurController::supprimerAuteurLivre
+  requirements:
+   id: \d+
+
+   
+# Action 16
+lister_auteurs_3livresdiff:
+ path: /auteurTroisLivres
+ controller: App\Controller\AuteurController::auteurTroisLivres
+
+# Action 20
+lister_auteurs_genres_ordre_chrono:
+ path: /lister_auteurs_genres_ordre_chrono
+ controller: App\Controller\AuteurController::listerAuteursGenresOrdreChrono
+
+# Action 21
+lister_auteur_genres:
+ path: /lister_genres/{id}
+ controller: App\Controller\AuteurController::listerAuteurGenres
+
+ # Action 26 
+augmenter_note_livre:
+  path: /augmenter_note/{id}
+  controller: App\Controller\AuteurController::augmenterNote
+
+retour_auteur:
+  path: /retour_auteur
+  controller: App\Controller\AuteurController::retourauteur

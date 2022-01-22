@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+    {% block contenu %}
+    {{ form_start(monFormulaire) }}
+        <div class="container">
+            
+            <h3 class="text-center mt-0">
+            <a href='{{ path('lister_livres') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+            </a>
+            <br>
+            
+            Veuillez entrer les deux dates</h3>
+	        <hr class="divider"/>
+            <form>
+                <div class="form-group datepicker">
+                    <label for="exampleInputPassword1" class='my-3'>{{form_label(monFormulaire.date1)}} :</label>
+                    {{form_widget(monFormulaire.date1,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                <div class="form-group datepicker">
+                    <label for="exampleInputPassword1" class='my-3'>{{form_label(monFormulaire.date2)}} :</label>
+                    {{form_widget(monFormulaire.date2,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                {{form_widget(monFormulaire.submit)}}
+                
+                <div class="form-group">
+            </form>
+            {{ form_end(monFormulaire) }}
+  <script>
+ $(document).on('ready', function() {
+         $('.js-datepicker').datepicker({
+              format: 'dd-mm-yyyy',
+         });
+     });
+
+</script>
+    {% endblock %}
+    

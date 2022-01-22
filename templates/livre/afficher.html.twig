@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+
+{% block contenu %}
+<div style="box-shadow: 2px 5px 3px 2px  #F4623A " class="card border  border-5 rounded-bottom " >
+            <div class="card-header " style="background-color:#F4623A">
+                <h3 class="text-center font-weight-bold font-italic pt-2 mt-2"> 
+                <h3 class="text-center mt-0">
+                <a href='{{ path('lister_livres') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+                <br>
+                Information d'auteur</h3>
+            </div>
+            <div class="card-body">
+
+                <table class="table bg-ligh table-striped text-center"> 
+                    <tbody>
+                    <tr>
+                        <th scope="row">ISBN</th>
+                        <td>{{livre.isbn}}</td>
+                    </tr>    
+                    <tr>
+                        <th scope="row">Titre</th>
+                        <td>{{livre.titre}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nombre de pages</th>
+                        <td>{{ livre.nbpages }}</td>
+                    </tr> 
+                    <tr>
+                        <th scope="row">Note</th> 
+                        <td>{{ livre.note }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Auteurs</th>
+                        <td>
+							{% for auteur in auteurs %}
+								<p class="card-text">{{ auteur }} <span><a href='{{ path ("afficher_auteur",{'id':auteur.id})}}'>voir</a></span></p>
+							{% endfor %}  
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Listes des genres</th>
+                        <td>
+                             {% for genre in genres %}
+                            {{ genre }}<br>
+				        {% endfor %}  
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+             </div>
+        </div> 
+{% endblock %}

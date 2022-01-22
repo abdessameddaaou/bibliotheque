@@ -1,0 +1,14 @@
+# Action 1
+lister_genres:
+ path: /liste
+ controller: App\Controller\GenreController::listerGenres
+
+# Action 24
+supprimer_genre:
+ path: /supprimer/{id}
+ controller: App\Controller\GenreController::supprimerGenre
+ 
+# Action 2
+ajouter_genre:
+ path: /ajouter
+ controller: App\Controller\GenreController::ajouterGenre

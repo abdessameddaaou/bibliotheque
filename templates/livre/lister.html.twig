@@ -1,0 +1,20 @@
+
+{% block body %}
+    <p class="text-warning text-bold h-100 alert-danger">Hi Everyone</p>
+   
+    {% for livres in livre %}
+       <ul>
+                    {{ livres.titre }}
+            <li>
+                    
+                    
+                   {% for auteurs in auteur %}
+                        {{ auteurs.nomprenom }}
+                   {% endfor %}
+
+                    
+            </li>
+        </ul>
+    {% endfor %}
+    
+{% endblock %}

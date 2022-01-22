@@ -1,0 +1,19 @@
+#mainNav {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/Books2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover; 
+    transition: background-color 0.2s ease;
+}
+
+section{
+    margin : 2% 0; 
+}
+
+
+
+table{
+    margin: 4% 0 0;
+}

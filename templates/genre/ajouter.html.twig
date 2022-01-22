@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+
+{% block contenu %}
+	<!-- Contact-->
+	<section class="page-section" id="contact">
+		<div class="container px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+				<div class="col-lg-8 col-xl-6 text-center">
+					<h2 class="mt-0">
+					<a href='{{ path('lister_genres') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    	<img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                	</a>
+                	<br>
+					Ajouter un genre
+					</h2>
+					<hr class="divider"/>
+				</div>
+			</div>
+			<div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+				<div class="col-lg-6">
+					{% if success == 1 %}
+						<div class="alert alert-success" role="alert">
+							Le genre a bien été enregistré ! Retour à la liste des genre
+							<a href="{{ path("lister_genres") }}">ici</a>
+						</div>
+					{% endif %}
+					{{ form_start(form) }}
+					<form
+						id="contactForm" data-sb-form-api-token="API_TOKEN">
+						<!-- Name input-->
+						<div class="form-floating mb-3">
+							{{ form_widget(form.nom , {'attr': {'placeholder' : 'Entrer un genre'}})}}
+							{{ form_errors(form.nom) }}
+						</div>
+						<!-- Submit success message-->
+						<div class="d-none" id="submitSuccessMessage">
+							<div class="text-center mb-3">
+								<div class="fw-bolder">Genre ajouté !</div>
+							</div>
+						</div>
+						<!-- Submit Button-->
+						<div class="d-grid">
+							{{ form_widget(form.enregistrer, { 'label': 'Ajouter un genre' , 'attr': {'class':'btn btn-primary btn-xl'}})}}
+						</form>
+						{{ form_end(form) }}
+						
+					</div>
+				</div>
+			</div>
+		</section>
+
+	{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+    {% block contenu %}
+    {{ form_start(monFormulaire) }}
+        <div class="container">
+            <h3 class="text-center mt-0">
+            
+            <h3 class="text-center mt-0">
+                <a href='{{ path('lister_livres') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+            <br>
+            Vous allez modifier le livre</h3>
+	        <hr class="divider"/>
+            <form>
+                <div class="form-group">
+                    <label for="isbn" class='my-3'>{{form_label(monFormulaire.isbn)}} : </label>
+                    {{form_widget(monFormulaire.isbn,{'attr': {'class': 'form-control'}})}}
+                </div>
+                <br>
+                <div class="form-group" class='my-3'>
+                    <label for="exampleInputPassword1">{{form_label(monFormulaire.titre)}} :</label>
+                    {{form_widget(monFormulaire.titre,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                <div class="form-group" class='my-3'>
+                    <label for="exampleInputPassword1">{{form_label(monFormulaire.nbpages)}} :</label>
+                    {{form_widget(monFormulaire.nbpages,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                <div class="form-group datepicker">
+                    <label for="exampleInputPassword1" class='my-3'>{{form_label(monFormulaire.date_de_parution)}} :</label>
+                    {{form_widget(monFormulaire.date_de_parution,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                <div class="form-group" class='my-3'>
+                    <label for="exampleInputPassword1">{{form_label(monFormulaire.note)}} :</label>
+                    {{form_widget(monFormulaire.note,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                <div class="form-group" class='my-3'>
+                    <label for="exampleInputPassword1">{{form_label(monFormulaire.auteurs)}} :</label>
+                    {{form_widget(monFormulaire.auteurs,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                <div class="form-group" class='my-3'>
+                    <label for="exampleInputPassword1">{{form_label(monFormulaire.genres)}} :</label>
+                    {{form_widget(monFormulaire.genres,{'attr': {'class': 'form-control'}})}}
+                    {# <input type="password" class="form-control" id="exampleInputPassword1"> #}
+                </div>
+                <br>
+                {{form_widget(monFormulaire.submit)}}
+                
+                <div class="form-group">
+            </form>
+            {{ form_end(monFormulaire) }}
+  <script>
+ $(document).on('ready', function() {
+         $('.js-datepicker').datepicker({
+              format: 'dd-mm-yyyy',
+         });
+     });
+
+</script>
+    {% endblock %}
+    

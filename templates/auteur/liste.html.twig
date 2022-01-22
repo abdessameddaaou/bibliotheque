@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Liste des Auteurs</title>{% endblock %}
+
+{% block contenu %}
+		
+		<img src="/assets/img/auteurs.jpg" alt="livres" style="display: block; margin-left: auto; margin-right: auto; width: 100%; border-radius: 25px;"/>
+		<br>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>{{message}}</strong> .
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+		{% for message in app.flashes('warning') %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>{{message}}</strong> .
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+		
+		<h2>
+		{% if action == 16 %}
+			
+		<a href='{{ path('lister_auteurs') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+		{% endif %}
+                <br>
+			<div class="dropdown" style="position: relative; float: right;">
+				<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					Les actions
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item btn btn-success" href="{{ path ('ajouter_auteur') }}">Ajouter un auteur</a></li>
+					<li><a class="dropdown-item btn btn-success" href="{{ path ('lister_auteurs_3livresdiff') }}">Voir les auteurs avec trois livres différents</a></li>
+					<li><a class="dropdown-item btn btn-success" href="{{ path ('lister_auteurs_genres_ordre_chrono') }}">Voir la liste des genres dans l’ordre chronologique</a></li>
+				</ul>
+			</div>
+		</h2>
+				<div id="portfolio">
+					{% if action == 16  %}
+						<div style="margin-top:100px;">
+							<h3>Liste des auteurs ayant écrit au moins 3 livres </h3>
+						</div>
+					{% endif %}
+					<table class="table float-right">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nom et prénom</th>
+								<th scope="col">Sexe</th>
+								<th scope="col">Date de naissance</th>
+								<th scope="col">Nationalité</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for auteur in auteurs %}
+								<tr>
+									<th scope="row">{{ auteur.id }}</th>
+									<td>{{ auteur.nomprenom }}</td>
+									<td>{{auteur.sexe ? 'Homme': 'Femme'}}</td>
+									<td>{{ auteur.datedenaissance|date('d/m/Y') }}</td>
+									<td>{{ auteur.getNationalite() }}</td>
+									<td>
+										<a data-bs-toggle="modal" data-bs-target="#id{{auteur.id}}" class="btn btn-danger">
+											<img src="/assets/img/corbeille.png" alt="Supprimer" style="width:20px"/>
+										</a>
+										<div class="modal fade" id="id{{auteur.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Supprimer : <span class='text-primary'> {{auteur.nomprenom}}</span></h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													Les livres de {{auteur.nomprenom}}
+													<ul>
+														{% for livre in auteur.ecrire %}
+															<li>{{livre.titre}}</li>
+														{% else %}
+															<p class='text-secondary'>Aucun Livre</p>
+														{% endfor %}
+														
+													</ul>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+													<a href='{{path ('supprimer_auteur',{'id':auteur.id})}}' type="button" class="btn btn-danger">Supprimer</a>
+												</div>
+												</div>
+											</div>
+										</div>
+										<a href='{{path ('modifier_auteur',{'id': auteur.id})}}' class='btn btn-success'>
+											<img src="/assets/img/edit.png" alt="Modifier" style="width:20px"/>
+										</a>
+										<a href='{{path ('afficher_auteur',{'id': auteur.id})}}' class = "btn btn-warning">
+											<i class="bi bi-eye-fill"></i>
+										</a>
+										<a href='{{path ('augmenter_note_livre',{'id': auteur.id})}}' class = "btn btn-secondary" style="position: relative; float: right;">
+											Ajouter Note
+										</a>
+										<a href='{{path ('lister_auteur_genres',{'id': auteur.id})}}' class = "btn btn-info mx-1" style="position: relative; float: right;">
+											Genres 
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+		</div>
+
+	<script>
+	//alert('HII')
+	$(".alert").fadeTo(2000, 500).slideUp(1000, function(){
+    	$(".alert").slideUp(500);
+	});
+	$('#myModal').on('shown.bs.modal', function () {
+ 	$('#myInput').trigger('focus')
+})
+	</script>
+{% endblock %}

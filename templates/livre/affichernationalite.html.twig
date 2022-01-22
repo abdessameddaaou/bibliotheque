@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+{% block contenu %}
+	{# <h3>Voici les livres souhaités:</h3> #}
+	<h3 class="text-center mt-0">
+	<h3 class="text-center mt-0">
+                <a href='{{ path('lister_livres') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+            <br>
+	Voici les livres dont tous les auteurs sont de nationalités différentes:</h3>
+	<hr class="divider"/>
+	
+	<div id="portfolio">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">isbn</th>
+					<th scope="col">titre</th>
+					<th scope="col">Nombre de pages</th>
+					{# <th scope="col">Date de parution</th> #}
+                    <th scope="col">Note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for livre in livres %}
+					<tr>
+						<th scope="row">{{ livre.id }}</th>
+						<td>{{ livre.isbn }}</td>
+						<td>{{ livre.titre }}</td>
+                        <td>{{ livre.nbpages }}</td>
+						{# <td>{{ livre.datedeparution }}</td> #}
+                        <td>{{ livre.note }}</td>
+						<td>
+                            <a href='{{ livre.id }}' class="btn btn-warning">
+									<i class="bi bi-eye-fill"></i>
+                            </a>
+                        </td>
+					</tr>
+
+					{% else %}
+					Aucun livre ne contient ce mot
+
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+{% endblock %}

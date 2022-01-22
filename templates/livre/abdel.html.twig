@@ -1,0 +1,11 @@
+
+{% for livre in livres %}
+   <ul> {{ livre.titre }} </ul>
+
+    {% for auteur in livre.auteurs %}
+    <li> {{ auteur.nomprenom }} {{ auteur.nationalite }}</li>
+
+{% endfor %}
+
+{% endfor %}
+

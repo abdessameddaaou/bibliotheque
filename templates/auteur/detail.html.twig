@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+
+       <div style="box-shadow: 2px 5px 3px 2px  #F4623A " class="card border  border-5 rounded-bottom " >
+            <div class="card-header " style="background-color:#F4623A">
+                <h3 class="text-center font-weight-bold font-italic pt-2 mt-2">
+                <a href='{{ path('lister_auteurs') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+                <br>
+                 Information d'auteur</h3>
+            </div>
+            <div class="card-body">
+
+                <table class="table bg-ligh table-striped text-center"> 
+                    <tbody>
+                    <tr>
+                        <th scope="row">Nom et prénom</th>
+                        <td>{{auteur.nomprenom}}</td>
+                    </tr>    
+                    <tr>
+                        <th scope="row">Nationnalité</th>
+                        <td>{{auteur.nationalite}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sexe</th>
+                        <td>{{auteur.sexe ? 'Homme': 'Femme'}}</td>
+                    </tr> 
+                    <tr>
+                        <th scope="row">Date de naissance</th>
+                        <td>{{auteur.datedenaissance|date('d/m/Y')}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Listes des livres</th>
+                        <td>
+                             {% for ecrire in ecrires %}
+                               <p class="card-text">{{ecrire.titre}} <span><a href='{{ path ("afficher_livre",{'id':ecrire.id})}}'>voir</a></span></p>
+                              {% else %}
+                                <p class='text-primary'>Ce auteur n'aucun livre</p>
+                             {% endfor %}
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Listes des genres</th>
+                        <td>
+                             {% for ecrire in ecrires %}
+                                {% for genre in ecrire.genres %}
+
+                                    {{genre}}<br>
+                                {% else %}
+                                     <p class='text-primary'>Ce auteur n'aucun livre</p>
+                                {% endfor %}
+                             {% endfor %}
+                            
+                        </td>
+                    </tr>
+                   
+                    
+                    
+                    </tbody>
+                </table>
+             </div>
+        </div> 
+ 
+{% endblock %}

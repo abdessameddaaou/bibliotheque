@@ -1,0 +1,28 @@
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+
+bookland:
+  path: /bookland
+  controller: App\Controller\HomeController::index
+
+home:
+  path: /bookland/home
+  controller: App\Controller\HomeController::home
+
+init:
+ path: /bookland/init
+ controller: App\Controller\HomeController::init
+
+auteur:
+ resource: routes/auteur/routes.yaml
+ prefix: /bookland/auteur
+
+livre:
+ resource: routes/livre/routes.yaml
+ prefix: /bookland/livre
+
+genre:
+ resource: routes/genre/routes.yaml
+ prefix: /bookland/genre
+

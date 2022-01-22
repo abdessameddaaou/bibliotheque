@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+    {% block contenu %}
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+
+        <div class="container">
+        <h3 class="text-center mt-0">
+                <a href='{{ path('lister_auteurs') }}' class="btn btn-success" style="display: block; margin-left: auto; margin-right: auto; width: 7%; border-radius: 25px; position: relative; float: left;">
+                    <img src="/assets/img/precedent.png" alt="Modifier" style="width:20px"/>
+                </a>
+                <br>
+        Ajouter une note : </h3>
+	    <hr class="divider"/>            
+        <h3 class="mb-4">Auteur : <span class="text-primary"> {{auteur.nomprenom}} </span></h3>
+        <h5>Listes des livres : </h5>
+        <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Isbn</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Note</th>
+            </tr>
+        </thead>
+        <tbody>
+         {% for livre in auteur.ecrire %}
+            <tr>
+            <th scope="row">{{livre.id}}</th>
+            <td>{{livre.isbn}}</td>
+            <td>{{livre.titre}}</td>
+            <td>{{livre.note}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+           
+            
+             {% for message in app.flashes('success') %}
+					<div class="alert alert-success alert-dismissible fade show">
+						<strong>{{message}}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+					</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+					<div class="alert alert-danger alert-dismissible fade show">
+						<strong>{{message}}</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+					</div>
+            {% endfor %}
+            <form>
+                <div class="form-group">
+                    <label for="nomprenom" class='my-3'>{{form_label(form.note)}} : </label>
+                    {{form_widget(form.note,{'attr': {'class': 'form-control'}})}}
+                </div>
+               
+                
+                {{form_widget(form.submit,{"attr":{'class':' btn btn-primary text-center my-3'}})}}
+                
+                <div class="form-group">
+            </form>
+          
+
+  
+    {% endblock %}
+    
+
